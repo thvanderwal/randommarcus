@@ -16,7 +16,7 @@ To publish this site to GitHub Pages:
 
 1. Go to your repository settings on GitHub
 2. Navigate to "Pages" in the left sidebar
-3. Under "Source", select the branch `copilot/build-random-quote-page` (or your main branch)
+3. Under "Source", select your main branch (e.g., `main` or `master`)
 4. Select "/ (root)" as the folder
 5. Click "Save"
 6. Your site will be published at: `https://thvanderwal.github.io/randommarcus/`
