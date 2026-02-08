@@ -12,14 +12,29 @@ A minimalist webpage displaying random quotes from Marcus Aurelius' *Meditations
 
 ## GitHub Pages Setup
 
-To publish this site to GitHub Pages:
+This repository is configured with automated GitHub Pages deployment using GitHub Actions.
+
+### Automated Deployment
+
+The site automatically deploys to GitHub Pages when changes are pushed to the `main` or `master` branch. The GitHub Actions workflow (`.github/workflows/deploy.yml`) handles the build and deployment process.
+
+**Site URL:** `https://thvanderwal.github.io/randommarcus/`
+
+### Manual Setup (One-time)
+
+If this is the first deployment, ensure GitHub Pages is enabled in your repository:
 
 1. Go to your repository settings on GitHub
 2. Navigate to "Pages" in the left sidebar
-3. Under "Source", select your main branch (e.g., `main` or `master`)
-4. Select "/ (root)" as the folder
-5. Click "Save"
-6. Your site will be published at: `https://thvanderwal.github.io/randommarcus/`
+3. Under "Source", select "GitHub Actions"
+4. The site will automatically deploy on the next push to main/master
+
+### Manual Deployment
+
+You can also trigger a manual deployment:
+1. Go to the "Actions" tab in your repository
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
 
 ## Local Development
 
