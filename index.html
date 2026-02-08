@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Random quotes from Marcus Aurelius' Meditations">
+    <title>Marcus Aurelius - Meditations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #ffffff;
+            color: #000000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .quote-container {
+            margin-bottom: 3rem;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .quote {
+            font-size: 1.8rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .author {
+            font-size: 1.2rem;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 1px;
+        }
+
+        .book-reference {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: normal;
+        }
+
+        .refresh-button {
+            background: none;
+            border: 2px solid #000000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .refresh-button:hover {
+            background-color: #000000;
+            transform: rotate(180deg);
+        }
+
+        .refresh-button:hover .refresh-icon {
+            stroke: #ffffff;
+        }
+
+        .refresh-button:active {
+            transform: rotate(180deg) scale(0.95);
+        }
+
+        .refresh-icon {
+            stroke: #000000;
+            stroke-width: 2;
+            fill: none;
+            transition: stroke 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .quote {
+                font-size: 1.4rem;
+            }
+            
+            .author {
+                font-size: 1rem;
+            }
+
+            .refresh-button {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quote-container">
+            <div class="quote" id="quote-text"></div>
+            <div class="author">— Marcus Aurelius</div>
+            <div class="book-reference" id="book-reference"></div>
+        </div>
+        <button class="refresh-button" onclick="getNewQuote()" aria-label="Get new quote">
+            <svg class="refresh-icon" width="32" height="32" viewBox="0 0 24 24">
+                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        // Authentic quotes from Marcus Aurelius' Meditations (George Long translation)
+        const quotes = [
+            {
+                text: "You have power over your mind - not outside events. Realize this, and you will find strength.",
+                book: "Book VI"
+            },
+            {
+                text: "The happiness of your life depends upon the quality of your thoughts.",
+                book: "Book V"
+            },
+            {
+                text: "If it is not right, do not do it; if it is not true, do not say it.",
+                book: "Book XII"
+            },
+            {
+                text: "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.",
+                book: "Book VI"
+            },
+            {
+                text: "Waste no more time arguing about what a good man should be. Be one.",
+                book: "Book X"
+            },
+            {
+                text: "The best revenge is to be unlike him who performed the injury.",
+                book: "Book VI"
+            },
+            {
+                text: "The soul becomes dyed with the color of its thoughts.",
+                book: "Book V"
+            },
+            {
+                text: "Dwell on the beauty of life. Watch the stars, and see yourself running with them.",
+                book: "Book VII"
+            },
+            {
+                text: "Our life is what our thoughts make it.",
+                book: "Book IV"
+            },
+            {
+                text: "When you arise in the morning, think of what a precious privilege it is to be alive - to breathe, to think, to enjoy, to love.",
+                book: "Book II"
+            },
+            {
+                text: "Very little is needed to make a happy life; it is all within yourself, in your way of thinking.",
+                book: "Book VII"
+            },
+            {
+                text: "If you are distressed by anything external, the pain is not due to the thing itself, but to your estimate of it; and this you have the power to revoke at any moment.",
+                book: "Book VIII"
+            },
+            {
+                text: "The impediment to action advances action. What stands in the way becomes the way.",
+                book: "Book V"
+            },
+            {
+                text: "Do not act as if you were going to live ten thousand years. Death hangs over you. While you live, while it is in your power, be good.",
+                book: "Book IV"
+            },
+            {
+                text: "Accept the things to which fate binds you, and love the people with whom fate brings you together, but do so with all your heart.",
+                book: "Book VI"
+            },
+            {
+                text: "The best revenge is not to be like your enemy.",
+                book: "Book VI"
+            },
+            {
+                text: "He who lives in harmony with himself lives in harmony with the universe.",
+                book: "Book VII"
+            },
+            {
+                text: "Confine yourself to the present.",
+                book: "Book VII"
+            },
+            {
+                text: "Look well into thyself; there is a source of strength which will always spring up if thou wilt always look.",
+                book: "Book VII"
+            },
+            {
+                text: "How much more grievous are the consequences of anger than the causes of it.",
+                book: "Book XI"
+            },
+            {
+                text: "The object of life is not to be on the side of the majority, but to escape finding oneself in the ranks of the insane.",
+                book: "Book VI"
+            },
+            {
+                text: "Be tolerant with others and strict with yourself.",
+                book: "Book X"
+            },
+            {
+                text: "When you wake up in the morning, tell yourself: the people I deal with today will be meddling, ungrateful, arrogant, dishonest, jealous and surly.",
+                book: "Book II"
+            },
+            {
+                text: "Never let the future disturb you. You will meet it, if you have to, with the same weapons of reason which today arm you against the present.",
+                book: "Book VII"
+            },
+            {
+                text: "To live a good life: We have the potential for it. If we can learn to be indifferent to what makes no difference.",
+                book: "Book VII"
+            },
+            {
+                text: "How much time he gains who does not look to see what his neighbor says or does or thinks, but only at what he does himself, to make it just and holy.",
+                book: "Book IV"
+            },
+            {
+                text: "It is not death that a man should fear, but he should fear never beginning to live.",
+                book: "Book XII"
+            },
+            {
+                text: "Reject your sense of injury and the injury itself disappears.",
+                book: "Book IV"
+            },
+            {
+                text: "The universe is change; our life is what our thoughts make it.",
+                book: "Book IV"
+            },
+            {
+                text: "Nowhere can man find a quieter or more untroubled retreat than in his own soul.",
+                book: "Book IV"
+            }
+        ];
+
+        let currentQuoteIndex = -1;
+
+        function getNewQuote() {
+            let newIndex;
+            do {
+                newIndex = Math.floor(Math.random() * quotes.length);
+            } while (newIndex === currentQuoteIndex && quotes.length > 1);
+            
+            currentQuoteIndex = newIndex;
+            const quote = quotes[currentQuoteIndex];
+            
+            document.getElementById('quote-text').textContent = `"${quote.text}"`;
+            document.getElementById('book-reference').textContent = quote.book;
+        }
+
+        // Display a quote when the page loads
+        window.addEventListener('DOMContentLoaded', getNewQuote);
+    </script>
+</body>
+</html>

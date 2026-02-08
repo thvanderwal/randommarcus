@@ -1,0 +1,9 @@
+# GitHub Pages configuration
+# This file ensures the site is built correctly
+
+# Theme (none - using custom HTML/CSS)
+theme: null
+
+# Include index.html in the build
+include:
+  - index.html
