@@ -4,7 +4,7 @@ A minimalist webpage displaying random quotes from Marcus Aurelius' *Meditations
 
 ## Features
 
-- 30 authentic quotes from Marcus Aurelius' *Meditations* (George Long translation)
+- 79 authentic quotes from Marcus Aurelius' *Meditations* (George Long translation)
 - Minimalist modern Greek design with white background and black text
 - Circular refresh button with smooth animations
 - Fully responsive for mobile and desktop
